@@ -1,0 +1,18 @@
+kind: pipeline
+type: docker
+name: default
+
+steps:
+- name: start
+  image: docker:latest
+  volumes:              
+    - name: docker_sock
+      path: /var/run/docker.sock
+  commands:
+  - docker compose down
+  - docker compose up -d
+
+volumes:
+- name: docker_sock
+  host:
+    path: /var/run/docker.sock
